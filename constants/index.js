@@ -14,3 +14,18 @@ export const getCheckpointStatus = (type) => {
       return '未知状态'
   }
 }
+
+export const PLATE_COLORS = [
+  {
+    label: '黄车牌',
+    value: 'yellow'
+  },
+  {
+    label: '蓝车牌',
+    value: 'blue'
+  },
+  {
+    label: '新能源车牌',
+    value: 'green'
+  }
+];
