@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import { storeData, getData } from './storage'
+import { Toast } from '@ant-design/react-native';
 
 const request = async function({ 
   method = 'GET', 
@@ -10,11 +11,11 @@ const request = async function({
 }) {
   let data = {};
   if (method === 'GET') {
-    url += qs.stringify(params)
+    url += qs.stringify(params, { addQueryPrefix: true })
   } else {
     data = params;
   }
-  const storeToken = await getData('token')
+  const storeToken = await getData('token');
   try {
     const res = await axios({
       method,
@@ -30,8 +31,14 @@ const request = async function({
     if (token) {
       await storeData('token', token)
     }
-    return res.data;
+    console.log(res)
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      throw Error('请求失败')
+    }
   } catch (err) {
+    Toast.fail(err.message || '请求失败')
     return err;
   }
 }

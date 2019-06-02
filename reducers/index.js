@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import * as init from './init'
+import * as checkpoint from './checkpoint'
 
 export default combineReducers({
-  init: combineReducers(init),
+  checkpoint: combineReducers(checkpoint),
 })
