@@ -11,7 +11,7 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 import createStore from './store/createStore'
 import sagas from './sagas'
-import AppNavigator from './pages'
+import PageRoot from './pages'
 
 const store = createStore();
 store.runSaga(sagas);
@@ -22,7 +22,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Provider store={store}>
-        <AppNavigator />
+        <PageRoot />
       </Provider>
     );
   }

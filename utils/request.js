@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import { storeData, getData } from './storage'
 
 const request = async function({ 
   method = 'GET', 
@@ -13,15 +14,22 @@ const request = async function({
   } else {
     data = params;
   }
-
+  const storeToken = await getData('token')
   try {
     const res = await axios({
       method,
       url,
       data,
-      baseURL: '',
-      headers
+      baseURL: 'https://test.tony-traffic.com',
+      headers: {
+        ...headers,
+        'x-auth-token': storeToken
+      }
     })
+    const token = res.headers['x-auth-token']
+    if (token) {
+      await storeData('token', token)
+    }
     return res.data;
   } catch (err) {
     return err;
@@ -32,9 +40,6 @@ const postReq = async function(payload) {
   return await request({ 
     method: 'POST', 
     ...payload, 
-    headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-    }
   })
 }
 

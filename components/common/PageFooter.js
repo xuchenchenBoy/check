@@ -1,40 +1,49 @@
+import React from 'react';
+import { Text, View } from 'react-native';
+import { Icon, SearchBar, TabBar } from '@ant-design/react-native';
+import NavigationService from '../../utils/navigationService'
 
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Container, Text, Header, Left, Body, Right, Button, Icon, Title, Content, Form, Item, Input,  Label, Footer, FooterTab, Badge} from 'native-base';
+export default class PageFooter extends React.Component {
+  onChangeTab(tabName) {
+    if (tabName !== this.props.routerName) {
+      NavigationService.navigate(tabName)
+    }
+  }
 
-class PageFooter extends React.Component {
   render() {
-    const { activeTab } = this.props;
-    const checkpointActive = activeTab === 'checkpoint';
-    const searchActive = activeTab === 'search';
-    const scanActive = activeTab === 'scan';
+    const { routerName } = this.props;
 
     return (
-      <Footer>
-        <FooterTab>
-          <Button active={searchActive} vertical>
-            <Icon active={searchActive} name="search" />
-            <Text>查询</Text>
-          </Button>
-          <Button active={scanActive} vertical>
-            <Icon active={scanActive} name="camera" />
-            <Text>扫码</Text>
-          </Button>
-          <Button active={checkpointActive} vertical>
-            <Icon active={checkpointActive} name="navigate" />
-            <Text>关卡</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
+      <TabBar
+        unselectedTintColor="#949494"
+        tintColor="#33A3F4"
+        styles={{ tabs: { height: 65}, barItemTitle: {fontSize: 15, }}}
+        barTintColor="#f5f5f5"
+      >
+        <TabBar.Item
+          title="查询"
+          icon={<Icon size={26} name="search" />}
+          selected={routerName === 'search'}
+          onPress={() => this.onChangeTab('search')}
+        >
+        </TabBar.Item>
+        <TabBar.Item
+          icon={<Icon size={26} name="scan" />}
+          title="扫码"
+          selected={routerName === 'qrScan'}
+          onPress={() => this.onChangeTab('qrScan')}
+        >
+        </TabBar.Item>
+        <TabBar.Item
+          icon={<Icon size={26} name="stop" />}
+          title="关卡"
+          tabBarTextStyle={{fontSize: 40}}
+          selected={routerName === 'checkpoint'}
+          onPress={() => this.onChangeTab('checkpoint')}
+        >
+        </TabBar.Item>
+      </TabBar>
     );
   }
 }
-
-const styles = StyleSheet.create({
- 
-  
-});
-
-export default PageFooter;
 
