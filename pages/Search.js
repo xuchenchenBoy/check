@@ -18,7 +18,7 @@ class Search extends React.Component {
 
   render() {
     const { list } = this.props;
-
+    console.log('this.porps', this.props)
     return (
       <View style={{height: '100%'}}>
        <PageHeader handleSearch={this.handleSearch} />

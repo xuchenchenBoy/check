@@ -6,6 +6,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Search from './Search'
 import Checkpoint from './Checkpoint'
 import QrScan from './QrScan'
+import WebContainer from './WebContainer'
 import { Button, Provider, Toast } from '@ant-design/react-native';
 import NavigationService from '../utils/navigationService'
 import { getData } from '../utils/storage'
@@ -27,6 +28,9 @@ const AppNavigator = createStackNavigator({
   },
   qrScan: {
     screen: QrScan
+  },
+  webContainer: {
+    screen: WebContainer
   }
 }, {
   initialRouteName

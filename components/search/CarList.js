@@ -1,12 +1,16 @@
 import React from 'react'
 import { Text, View, StyleSheet, } from 'react-native';
 import { ListView, WingBlank, WhiteSpace, Flex, Button } from '@ant-design/react-native';
-import { PLATE_COLORS } from '../../constants/index'
-import { formatTime } from '../../utils/index'
+import { PLATE_COLORS, } from '../../constants/index'
+import { formatTime, BASE_URL } from '../../utils/index'
+import NavigationService from '../../utils/navigationService'
 
 export default class CardList extends React.Component {
-  goDetail = () => {
-    this.props.goDetail()
+  goDetail = (item) => {
+    const { id, plate_number, permit_number, phone } = item;
+    NavigationService.navigate('webContainer', {
+      url: `${BASE_URL}/index.html#/permit?id=${id}&plate_number=${ plate_number }&permit_number=${ permit_number }&phone=${phone}`
+    })
   }
 
   render() {
@@ -18,7 +22,7 @@ export default class CardList extends React.Component {
           list.map(i => {
             const { plate_number, route, vehicle_type, start_time, end_time } = i;
             const vehicle = PLATE_COLORS.find(i => i.value === vehicle_type) || {};
-            
+
             return (
               <WingBlank key={`${plate_number}_${vehicle_type}`}>
                 <WhiteSpace size="lg" />
@@ -36,7 +40,7 @@ export default class CardList extends React.Component {
                   </View>
                   <Flex justify="end">
                     <WingBlank>
-                      <Button onPress={() => this.goDetail()} type="primary">查看</Button>
+                      <Button onPress={() => this.goDetail(i)} type="primary">查看</Button>
                     </WingBlank>
                   </Flex>
                 </View>

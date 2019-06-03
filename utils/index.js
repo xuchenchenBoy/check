@@ -17,3 +17,5 @@ export function formatTime (date) {
 
   return `${t1} ${t2}`
 }
+
+export const BASE_URL = 'https://test.tony-traffic.com'

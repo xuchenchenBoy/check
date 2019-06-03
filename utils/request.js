@@ -2,6 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import { storeData, getData } from './storage'
 import { Toast } from '@ant-design/react-native';
+import { BASE_URL } from './index'
 
 const request = async function({ 
   method = 'GET', 
@@ -21,7 +22,7 @@ const request = async function({
       method,
       url,
       data,
-      baseURL: 'https://test.tony-traffic.com',
+      baseURL: BASE_URL,
       headers: {
         ...headers,
         'x-auth-token': storeToken
