@@ -104,6 +104,10 @@ class Checkpoint extends React.Component {
     );
   };
 
+  goRouter = (routeName) => {
+    this.props.navigation.replace(routeName)
+  }
+
   render() {
     return (
       <View style={{height: '100%'}}>
@@ -122,7 +126,7 @@ class Checkpoint extends React.Component {
           <WhiteSpace />
         </View>
         <View style={{ position: 'absolute', left: 0, bottom: 0, width: '100%' }}>
-          <PageFooter routerName="checkpoint" />
+          <PageFooter goRouter={this.goRouter} routerName="checkpoint" />
         </View>
       </View>
     );

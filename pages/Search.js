@@ -16,14 +16,17 @@ class Search extends React.Component {
     this.props.handleSearch(payload)
   }
 
+  goRouter = (routeName) => {
+    this.props.navigation.replace(routeName)
+  }
+
   render() {
     const { list } = this.props;
-    console.log('this.porps', this.props)
     return (
       <View style={{height: '100%'}}>
        <PageHeader handleSearch={this.handleSearch} />
        <CarList list={list} />
-       <PageFooter routerName="search" />
+       <PageFooter goRouter={this.goRouter} routerName="search" />
       </View>
     );
   }

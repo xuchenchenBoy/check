@@ -13,7 +13,7 @@ import { getData } from '../utils/storage'
 
 let initialRouteName = 'login'
 if (getData('token')) {
-  initialRouteName = 'search'
+  initialRouteName = 'qrScan'
 }
 
 const AppNavigator = createStackNavigator({

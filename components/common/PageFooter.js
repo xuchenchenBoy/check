@@ -2,11 +2,13 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { Icon, SearchBar, TabBar } from '@ant-design/react-native';
 import NavigationService from '../../utils/navigationService'
+import { NavigationActions } from 'react-navigation';
 
 export default class PageFooter extends React.Component {
   onChangeTab(tabName) {
     if (tabName !== this.props.routerName) {
-      NavigationService.navigate(tabName)
+      // NavigationService.navigate(tabName)
+      this.props.goRouter(tabName)
     }
   }
 
