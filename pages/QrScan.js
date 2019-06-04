@@ -14,7 +14,7 @@ class QrScan extends React.Component {
 
   componentDidMount() {
     console.log('did')
-    this.scanRef.reactivate()
+    // this.scanRef.reactivate()
   }
 
   onReadScan(e) {
@@ -37,6 +37,7 @@ class QrScan extends React.Component {
           ref={ref => this.scanRef = ref}
           onRead={this.onReadScan.bind(this)}
           reactivate={reactivate}
+          cameraStyle={{height: '100%'}}
         />
         <Container />
         <View style={styles.bottom}>

@@ -20,11 +20,15 @@ class Search extends React.Component {
     this.props.navigation.replace(routeName)
   }
 
+  goCamera = () => {
+    this.props.navigation.push('cameraHandler')
+  }
+
   render() {
     const { list } = this.props;
     return (
       <View style={{height: '100%'}}>
-       <PageHeader handleSearch={this.handleSearch} />
+       <PageHeader goCamera={this.goCamera} handleSearch={this.handleSearch} />
        <CarList list={list} />
        <PageFooter goRouter={this.goRouter} routerName="search" />
       </View>

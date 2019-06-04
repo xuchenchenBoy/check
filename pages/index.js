@@ -6,6 +6,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Search from './Search'
 import Checkpoint from './Checkpoint'
 import QrScan from './QrScan'
+import CameraHandler from './CameraHandler'
 import WebContainer from './WebContainer'
 import { Button, Provider, Toast } from '@ant-design/react-native';
 import NavigationService from '../utils/navigationService'
@@ -13,7 +14,7 @@ import { getData } from '../utils/storage'
 
 let initialRouteName = 'login'
 if (getData('token')) {
-  initialRouteName = 'qrScan'
+  initialRouteName = 'search'
 }
 
 const AppNavigator = createStackNavigator({
@@ -31,6 +32,9 @@ const AppNavigator = createStackNavigator({
   },
   webContainer: {
     screen: WebContainer
+  },
+  cameraHandler: {
+    screen: CameraHandler
   }
 }, {
   initialRouteName

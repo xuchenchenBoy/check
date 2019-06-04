@@ -58,6 +58,10 @@ class PageHeader extends React.Component {
     })
   }
 
+  goCamera = () => {
+    this.props.goCamera()
+  }
+
   render() {
     const { inputVal, value } = this.state;
     return (
@@ -81,7 +85,7 @@ class PageHeader extends React.Component {
             style={styles.plate}
             placeholder="请输入"
             onChange={this.onChangeInput}
-            extra={<Icon name="camera" size="lg" color="#108EE9" />}
+            extra={<Icon onPress={this.goCamera} name="camera" size="lg" color="#108EE9" />}
           >
             车牌号
           </InputItem>
