@@ -29,8 +29,24 @@ class PageHeader extends React.Component {
     
     this.state = {
       value: ['yellow'],
-      inputVal: '豫A12345'
+      inputVal: ''
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.carNumber !== nextProps.carNumber) {
+      const matchItem = PLATE_COLORS.find(i => i.value === nextProps.plateColor);
+      let colorVal = []
+      if (matchItem) {
+        colorVal = [nextProps.plateColor]
+      }
+      this.setState({
+        value: colorVal,
+        inputVal: nextProps.carNumber
+      }, () => {
+        this.handleSearch()
+      })
+    }
   }
 
   changePlateColor = (value) => {

@@ -4,6 +4,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { Button, InputItem, List, WhiteSpace, WingBlank, Toast } from '@ant-design/react-native';
 import { connect } from 'react-redux'
 import * as types from '../constants/actionTypes'
+import { storeData, getData } from '../utils/storage'
 
 class Login extends React.Component {
   constructor(props) {
@@ -11,6 +12,14 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+    }
+  }
+
+  async componentWillMount() {
+    const token = await getData('token');
+    console.log('token=', token)
+    if (token) {
+      this.props.navigation.replace('search')
     }
   }
 

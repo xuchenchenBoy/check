@@ -12,11 +12,6 @@ import { Button, Provider, Toast } from '@ant-design/react-native';
 import NavigationService from '../utils/navigationService'
 import { getData } from '../utils/storage'
 
-let initialRouteName = 'login'
-if (getData('token')) {
-  initialRouteName = 'search'
-}
-
 const AppNavigator = createStackNavigator({
   login: {
     screen: Login
@@ -37,7 +32,7 @@ const AppNavigator = createStackNavigator({
     screen: CameraHandler
   }
 }, {
-  initialRouteName
+  initialRouteName: 'login'
 });
 
 const NavCom = createAppContainer(AppNavigator);

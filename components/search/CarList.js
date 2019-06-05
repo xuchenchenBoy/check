@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import { ListView, WingBlank, WhiteSpace, Flex, Button } from '@ant-design/react-native';
 import { PLATE_COLORS, } from '../../constants/index'
 import { formatTime, BASE_URL } from '../../utils/index'
@@ -17,7 +17,7 @@ export default class CardList extends React.Component {
     const { list = [] } = this.props;
 
     return (
-      <View>
+      <ScrollView>
         {
           list.map(i => {
             const { plate_number, route, vehicle_type, start_time, end_time } = i;
@@ -49,7 +49,12 @@ export default class CardList extends React.Component {
             )
           })
         }
-      </View>
+        <WhiteSpace size="lg" />
+        <WhiteSpace size="lg" />
+        <WhiteSpace size="lg" />
+        <WhiteSpace size="lg" />
+        <WhiteSpace size="lg" />
+      </ScrollView>
     )
   }
 }
