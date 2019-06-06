@@ -57,6 +57,11 @@ export default class CameraHandler extends PureComponent {
           mark: "plate"
         }})
         console.log('data=', data)
+        if (data.error_code) {
+          Toast.fail(data.error_message)
+          Portal.remove(key)
+          return
+        }
         const result = data.words_result || [];
         const { number, color } = result[0] || {};
         this.props.navigation.state.params.callBack(number, color);
