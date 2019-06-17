@@ -23,7 +23,6 @@ class Search extends React.Component {
 
   async componentWillMount() {
     const token = await getData('token');
-    console.log('token=', token)
     if (!token) {
       this.props.navigation.replace('login')
     }
@@ -44,6 +43,12 @@ class Search extends React.Component {
           this.setState({
             cameraCarNumber: number,
             plateColor: color
+          }, () => {
+            this.props.handleSearch({
+              vehicle_type: color,
+              plate_number: number,
+              state: 'ACCEPTED'
+            })
           })
         }
       }
@@ -52,11 +57,10 @@ class Search extends React.Component {
 
   render() {
     const { list } = this.props;
-    const { carNumber, plateColor } = this.state;
-
+    const { cameraCarNumber, plateColor } = this.state;
     return (
       <View style={{height: '100%'}}>
-       <PageHeader carNumber={carNumber} plateColor={plateColor} goCamera={this.goCamera} handleSearch={this.handleSearch} />
+       <PageHeader carNumber={cameraCarNumber} plateColor={plateColor} goCamera={this.goCamera} handleSearch={this.handleSearch} />
        <CarList list={list} />
        <View style={styles.bottom}>
         <PageFooter goRouter={this.goRouter} routerName="search" />

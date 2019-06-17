@@ -19,7 +19,6 @@ const request = async function({
   }
   const storeToken = await getData('token');
   try {
-    console.log('storeToken=', storeToken)
     const res = await axios({
       method,
       url,
@@ -36,30 +35,29 @@ const request = async function({
       return;
     }
     if (res.status === 401) {
-      NavigationService.navigate('login');
       Toast.fail('登录失效，请重新登录')
+      await storeData('token', undefined)
+      NavigationService.navigate('login');
       return;
     }
     const token = res.headers['x-auth-token']
     if (token) {
       await storeData('token', token)
     }
-    console.log(res)
     if (res.status === 200) {
       return res.data;
     } else {
       throw Error('请求失败')
     }
   } catch (err) {
-    console.log('err=', err)
-    if (err.status === 401) {
-      NavigationService.navigate('login');
+    if (err && typeof err === 'string' && (err.indexOf('401') !== -1)) {
       Toast.fail('登录失效，请重新登录')
-      return err;
+      await storeData('token', '')
+      NavigationService.navigate('login');
+      throw Error('请求失败')
     }
-    console.log('err=', err)
     Toast.fail(err.message || '请求失败')
-    return err;
+    throw Error('请求失败')
   }
 }
 

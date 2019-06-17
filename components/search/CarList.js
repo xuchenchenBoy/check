@@ -49,6 +49,15 @@ export default class CardList extends React.Component {
             )
           })
         }
+        { list.length 
+          ? null 
+          : <View>
+              <WhiteSpace size="lg" />
+              <WhiteSpace size="lg" />
+              <WhiteSpace size="lg" />
+              <Text style={{textAlign: 'center'}}>暂无数据</Text>
+            </View>
+        }
         <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />
