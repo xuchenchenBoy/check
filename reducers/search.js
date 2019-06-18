@@ -10,3 +10,16 @@ export function list (state = [], { type, payload }) {
       return state;
   }
 }
+
+export function loading(state = false, { type, payload }) {
+  switch (type) {
+    case types.SEARCH_GET_PLATE_REQ:
+      return true;
+    case types.SEARCH_GET_PLATE_SUC:
+      return false;
+    case types.SEARCH_GET_PLATE_ERR:
+      return false;
+    default:
+      return state;
+  }
+}

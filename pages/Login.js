@@ -17,7 +17,6 @@ class Login extends React.Component {
 
   async componentWillMount() {
     const token = await getData('token');
-    console.log('token=', token)
     if (token) {
       this.props.navigation.replace('search')
     }

@@ -56,11 +56,17 @@ class Search extends React.Component {
   }
 
   render() {
-    const { list } = this.props;
+    const { list, loading, } = this.props;
     const { cameraCarNumber, plateColor } = this.state;
     return (
       <View style={{height: '100%'}}>
-       <PageHeader carNumber={cameraCarNumber} plateColor={plateColor} goCamera={this.goCamera} handleSearch={this.handleSearch} />
+       <PageHeader 
+        loading={loading} 
+        carNumber={cameraCarNumber} 
+        plateColor={plateColor} 
+        goCamera={this.goCamera} 
+        handleSearch={this.handleSearch} 
+       />
        <CarList list={list} />
        <View style={styles.bottom}>
         <PageFooter goRouter={this.goRouter} routerName="search" />

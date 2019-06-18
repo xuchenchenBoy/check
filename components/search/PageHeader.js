@@ -80,6 +80,8 @@ class PageHeader extends React.Component {
 
   render() {
     const { inputVal, value } = this.state;
+    const { loading } = this.props;
+
     return (
       <View>
           <List>
@@ -110,7 +112,12 @@ class PageHeader extends React.Component {
         <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
         <WingBlank>
-        <Button onPress={this.handleSearch} type="primary">
+        <Button 
+          disabled={loading} 
+          loading={loading} 
+          onPress={this.handleSearch} 
+          type="primary"
+        >
             查询
         </Button>
         </WingBlank>

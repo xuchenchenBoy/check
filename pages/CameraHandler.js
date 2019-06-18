@@ -19,7 +19,16 @@ export default class CameraHandler extends PureComponent {
     title: '拍照识别',
   };
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false
+    }
+  }
+
   render() {
+    const { loading } = this.state;
+
     return (
       <View style={styles.container}>
         <RNCamera
@@ -46,7 +55,12 @@ export default class CameraHandler extends PureComponent {
   }
 
   takePicture = async() => {
+    const { loading } = this.state;
+    if (loading) return;
     if (this.camera) {
+      this.setState({
+        loading: true
+      })
       const key = Toast.loading('识别中')
       const options = { quality: 0.2, base64: true, };
       const data = await this.camera.takePictureAsync(options);
@@ -56,9 +70,8 @@ export default class CameraHandler extends PureComponent {
           photo: base64,
           mark: "plate"
         }})
-        console.log('data=', data)
         if (data.error_code) {
-          Toast.fail(data.error_message)
+          Toast.fail(data.error_massage)
           Portal.remove(key)
           return
         }
@@ -66,12 +79,14 @@ export default class CameraHandler extends PureComponent {
         const { number, color } = result[0] || {};
         this.props.navigation.state.params.callBack(number, color);
         this.props.navigation.goBack();
-        console.log('back')
         Portal.remove(key)
       } catch (err) {
-        console.log(err)
         Portal.remove(key)
-      } 
+      } finally {
+        this.setState({
+          loading: false
+        })
+      }
     }
   };
 }
