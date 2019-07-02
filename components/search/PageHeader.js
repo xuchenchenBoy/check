@@ -15,8 +15,8 @@ const CustomChildren = props => (
         alignContent: 'space-around',
       }}
     >
-      <Text style={{ paddingRight: 25,  fontSize: 18, color: '#000' }}>{props.children}</Text>
-      <Text style={{ textAlign: 'center', fontSize: 16, color: '#999', marginRight: 15 }}>
+      <Text style={{ paddingRight: 25, paddingLeft: 14, fontSize: 22, color: '#000' }}>{props.children}</Text>
+      <Text style={{ textAlign: 'center', fontSize: 20, color: '#999', marginRight: 15 }}>
         {props.extra}
       </Text>
     </View>
@@ -97,16 +97,19 @@ class PageHeader extends React.Component {
               <CustomChildren>车牌色</CustomChildren>
             </Picker>
           </List.Item>
-          <InputItem
-            value={inputVal}
-            clear
-            style={styles.plate}
-            placeholder="请输入"
-            onChange={this.onChangeInput}
-            extra={<Icon onPress={this.goCamera} name="camera" size="lg" color="#108EE9" />}
-          >
-            车牌号
-          </InputItem>
+          <List.Item>
+            <InputItem
+              value={inputVal}
+              clear
+              last
+              style={styles.plate}
+              placeholder="请输入"
+              onChange={this.onChangeInput}
+              extra={<Icon style={{paddingLeft: 15}} onPress={this.goCamera} name="camera" size="lg" color="#108EE9" />}
+            >
+              <Text style={{fontSize: 22, color: '#000'}}>车牌号</Text>
+            </InputItem>
+          </List.Item>
         </List>
         <WhiteSpace size="xl"/>
         <WhiteSpace size="xl"/>
@@ -131,8 +134,9 @@ const styles = StyleSheet.create({
     color: '#000'
   },
   plate: {
+    paddingLeft: 20,
     color: '#999', 
-    fontSize: 15
+    fontSize: 20
   }
 });
 

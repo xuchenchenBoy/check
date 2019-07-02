@@ -6,12 +6,12 @@ import PageHeader from '../components/search/PageHeader'
 import CarList from '../components/search/CarList'
 import { connect } from 'react-redux'
 import * as types from '../constants/actionTypes'
-import { getData } from '../utils/storage'
+import { getData, storeData } from '../utils/storage'
 
 class Search extends React.Component {
   static navigationOptions = {
-    header: null
-  }
+    title: '名字',
+  };
 
   constructor(props) {
     super(props);
@@ -22,6 +22,7 @@ class Search extends React.Component {
   }
 
   async componentWillMount() {
+    const username = await getData('username')
     const token = await getData('token');
     if (!token) {
       this.props.navigation.replace('login')

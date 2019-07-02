@@ -62,7 +62,7 @@ export default class CameraHandler extends PureComponent {
         loading: true
       })
       const key = Toast.loading('识别中')
-      const options = { quality: 0.2, base64: true, };
+      const options = { quality: 0.1, base64: true, };
       const data = await this.camera.takePictureAsync(options);
       const { base64 } = data;
       try {
