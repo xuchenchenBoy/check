@@ -11,8 +11,8 @@ var instance = axios.create({
   validateStatus: async status => { 
     if (status === 401) {
       Toast.fail('登录失效，请重新登录')
-      await storeData('token', undefined)
-      NavigationService.navigate('login');
+      await storeData('token', '')
+      NavigationService.replaceRouter('login');
       return false;
     }
     return status === 200 
@@ -22,7 +22,6 @@ var instance = axios.create({
 instance.interceptors.request.use(
   async config => {
     const token = await getData('token')
-    console.log('token==', token)
     if (token) {  
       config.headers['x-auth-token'] = token;
     }
@@ -45,6 +44,7 @@ instance.interceptors.response.use(async (res = {}) => {
     data = data.response;
   }
   if (data.error_code) {
+    Toast.fail(data.error_massage, 2, () => {}, false)
     return Promise.reject(data);
   } else {
     return Promise.resolve(data);

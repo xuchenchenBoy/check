@@ -17,10 +17,21 @@ function navigate(routeName, params) {
 }
 
 function replaceRouter(routeName, params) {
+  console.log('replaceRouter=', routeName)
   _navigator.dispatch(
     StackActions.replace({
       routeName,
       params,
+    })
+  );
+}
+
+function resetRouter(routeName, params) {
+  console.log('reset')
+  _navigator.dispatch(
+    StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName })],
     })
   );
 }
@@ -31,4 +42,5 @@ export default {
   navigate,
   setTopLevelNavigator,
   replaceRouter,
+  resetRouter
 };

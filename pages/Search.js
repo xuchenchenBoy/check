@@ -9,8 +9,11 @@ import * as types from '../constants/actionTypes'
 import { getData, storeData } from '../utils/storage'
 
 class Search extends React.Component {
-  static navigationOptions = {
-    title: '名字',
+  static navigationOptions = async ({ navigation }) => {
+    const username = await getData('username')
+    return {
+      title: username || '33',
+    };
   };
 
   constructor(props) {
@@ -22,11 +25,14 @@ class Search extends React.Component {
   }
 
   async componentWillMount() {
-    const username = await getData('username')
     const token = await getData('token');
     if (!token) {
       this.props.navigation.replace('login')
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetList()
   }
 
   handleSearch = (payload) => {
@@ -57,7 +63,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { list, loading, } = this.props;
+    const { list, loading, hadReqList } = this.props;
     const { cameraCarNumber, plateColor } = this.state;
     return (
       <View style={{height: '100%'}}>
@@ -68,7 +74,7 @@ class Search extends React.Component {
         goCamera={this.goCamera} 
         handleSearch={this.handleSearch} 
        />
-       <CarList list={list} />
+       <CarList hadReqList={hadReqList} list={list} />
        <View style={styles.bottom}>
         <PageFooter goRouter={this.goRouter} routerName="search" />
        </View>
@@ -91,6 +97,11 @@ export default connect(({ search }) => ({ ...search }), (dispatch) => ({
     dispatch({
       type: types.SEARCH_GET_PLATE_REQ,
       payload
+    })
+  },
+  resetList(){
+    dispatch({
+      type: types.RESET_PLATE_LIST
     })
   }
 }))(Search);

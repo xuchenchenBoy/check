@@ -14,7 +14,7 @@ export default class CardList extends React.Component {
   }
 
   render() {
-    const { list = [] } = this.props;
+    const { list = [], hadReqList } = this.props;
 
     return (
       <ScrollView>
@@ -55,7 +55,7 @@ export default class CardList extends React.Component {
               <WhiteSpace size="lg" />
               <WhiteSpace size="lg" />
               <WhiteSpace size="lg" />
-              <Text style={{textAlign: 'center'}}>暂无数据</Text>
+              <Text style={{textAlign: 'center'}}>{ hadReqList ? '未查询到通行证' : ''}</Text>
             </View>
         }
         <WhiteSpace size="lg" />

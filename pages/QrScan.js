@@ -13,7 +13,8 @@ class QrScan extends React.Component {
   }
 
   onReadScan(e) {
-    e.data && this.props.checkEncrypt({
+    const { reactivate } = this.props;
+    (reactivate && e.data) && this.props.checkEncrypt({
       encrypt_data: e.data
     })
   }
@@ -29,7 +30,7 @@ class QrScan extends React.Component {
         <QRCodeScanner
           ref={ref => this.scanRef = ref}
           onRead={this.onReadScan.bind(this)}
-          reactivate={reactivate}
+          reactivate={true}
           cameraStyle={{height: '100%'}}
         />
         <Container />

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { postReq } from '../utils/request'
-import { Portal, Toast } from '@ant-design/react-native'
+import { Portal, Toast, Button } from '@ant-design/react-native'
 
 export default class CameraHandler extends PureComponent {
   static navigationOptions = {
@@ -45,10 +45,8 @@ export default class CameraHandler extends PureComponent {
           }}
           captureAudio={false}
         /> 
-        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-          <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-            <Text style={{ fontSize: 14 }}> 识别 </Text>
-          </TouchableOpacity>
+        <View style={{ flex: 0, padding: 15, flexDirection: 'row', justifyContent: 'center' }}>
+        <Button disabled={loading} onPress={this.takePicture.bind(this)} loading={loading}>{loading ? '识别中...' : '识别' }</Button>
         </View>
       </View>
     );
@@ -79,13 +77,15 @@ export default class CameraHandler extends PureComponent {
         const { number, color } = result[0] || {};
         this.props.navigation.state.params.callBack(number, color);
         this.props.navigation.goBack();
-        Portal.remove(key)
       } catch (err) {
-        Portal.remove(key)
+        console.log(err)
       } finally {
-        this.setState({
-          loading: false
-        })
+        setTimeout(() => {
+          Portal.remove(key)
+          this.setState({
+            loading: false
+          })
+        }, 2000)
       }
     }
   };
