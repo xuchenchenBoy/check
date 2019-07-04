@@ -24,7 +24,6 @@ class QrScan extends React.Component {
   }
 
   render() {
-    const { reactivate } = this.props;
     return (
       <View style={styles.container}>
         <QRCodeScanner

@@ -38,7 +38,7 @@ export default class PageFooter extends React.Component {
         </TabBar.Item>
         <TabBar.Item
           icon={<Icon size={26} name="stop" />}
-          title="关卡"
+          title="卡口控制"
           tabBarTextStyle={{fontSize: 40}}
           selected={routerName === 'checkpoint'}
           onPress={() => this.onChangeTab('checkpoint')}

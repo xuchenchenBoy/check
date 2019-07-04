@@ -1,34 +1,37 @@
 
 import React from "react";
-import { View, StyleSheet, TouchableNativeFeedback,  } from "react-native";
+import { View, StyleSheet, TouchableNativeFeedback, Text, Button } from "react-native";
 import PageFooter from '../components/common/PageFooter'
 import PageHeader from '../components/search/PageHeader'
 import CarList from '../components/search/CarList'
 import { connect } from 'react-redux'
 import * as types from '../constants/actionTypes'
 import { getData, storeData } from '../utils/storage'
+import { Flex, Icon } from '@ant-design/react-native'
 
 class Search extends React.Component {
-  static navigationOptions = async ({ navigation }) => {
-    const username = await getData('username')
-    return {
-      title: username || '33',
-    };
-  };
-
   constructor(props) {
     super(props);
     this.state = {
       cameraCarNumber: '',
-      plateColor: ''
+      plateColor: '',
+      username: ''
     }
   }
 
+  static navigationOptions = {
+    header: null
+  }
+  
   async componentWillMount() {
     const token = await getData('token');
     if (!token) {
       this.props.navigation.replace('login')
     }
+    const username = await getData('username');
+    this.setState({
+      username
+    })
   }
 
   componentWillUnmount() {
@@ -62,11 +65,24 @@ class Search extends React.Component {
     })
   }
 
+  async logout() {
+    await storeData('token', '');
+    this.props.navigation.replace('login')
+  }
+
   render() {
     const { list, loading, hadReqList } = this.props;
-    const { cameraCarNumber, plateColor } = this.state;
+    const { cameraCarNumber, plateColor, username } = this.state;
+
     return (
       <View style={{height: '100%'}}>
+        <Flex style={styles.header} justify="between">
+          <Flex align="center">
+            <Icon color="#108EE9" name="environment"></Icon>
+            <Text style={styles.username}>{username}</Text>
+          </Flex>
+          <Text onPress={this.logout.bind(this)} style={styles.logout}>登出</Text>
+        </Flex>
        <PageHeader 
         loading={loading} 
         carNumber={cameraCarNumber} 
@@ -84,6 +100,17 @@ class Search extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    padding: 20,
+    paddingLeft: 22,
+    paddingRight: 22,
+  },
+  username: {
+    fontSize: 16
+  },
+  logout: {
+    fontSize: 16
+  },
   bottom: {
     position: 'absolute', 
     left: 0, 

@@ -15,12 +15,12 @@ class Login extends React.Component {
     }
   }
 
-  async componentWillMount() {
-    const token = await getData('token');
-    if (token) {
-      this.props.navigation.replace('search')
-    }
-  }
+  // async componentWillMount() {
+  //   const token = await getData('token');
+  //   if (token) {
+  //     this.props.navigation.replace('search')
+  //   }
+  // }
 
   static navigationOptions = {
     title: '登录',

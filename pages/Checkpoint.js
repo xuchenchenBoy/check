@@ -65,17 +65,45 @@ class Checkpoint extends React.Component {
     const { group_name, status, gate_num } = item;
     const isNormalStatus = NORMAL_STATUS === status;
     const isCloseStatus = CLOSED_STATUS === status;
+    const isUnlineStatus = FAULT_STATUS === status;
 
     return (
       <WingBlank>
         <WhiteSpace />
         <View style={styles.item}>
-          <View>
+        <Flex>
+                <Flex.Item style={{ paddingTop: 20, paddingBottom: 20 }}>
+                <Text style={styles.name}>{group_name}</Text>
+                </Flex.Item>
+                <Flex.Item style={{ paddingTop: 20, paddingBottom: 20,paddingLeft: 4, paddingRight: 4 }}>
+                <Text style={[styles.status, isNormalStatus ? styles.normal_status : null, isCloseStatus ? styles.close_status : null, isUnlineStatus ? styles.unline_status : null]}>{getCheckpointStatus(status)}</Text>
+                </Flex.Item>
+                <Flex.Item style={{ paddingTop: 20, paddingBottom: 20,paddingLeft: 4, paddingRight: 4 }}>
+                <Flex justify="end">
+              <Button style={{width: 60, marginRight: 10}}  size="small" onPress={() => this.openPoint(gate_num)} type="primary">开闸</Button>
+            { 
+              isCloseStatus || (FAULT_STATUS === status)
+                ? (
+                      <Button style={{width: 60, marginRight: 10}}  size="small" onPress={() => this.restorePoint(gate_num)} type="ghost">恢复</Button>
+                )
+                : null
+            }
+            {
+              isNormalStatus
+                ? (
+                      <Button style={{width: 60}} size="small" onPress={() => this.closePoint(gate_num)} type="ghost">锁定</Button>
+                )
+                : null
+            }
+            </Flex>
+                </Flex.Item>
+              </Flex>
+          {/* <View>
             <Text style={styles.name}>{group_name}</Text>
             <WhiteSpace />
             <Text style={[styles.status, isNormalStatus ? styles.normal_status : null, isCloseStatus ? styles.close_status : null]}>{getCheckpointStatus(status)}</Text>
-          </View>
-          <Flex justify="end">
+          </View> */}
+          {/* <Flex justify="end">
             <WingBlank>
               <Button onPress={() => this.openPoint(gate_num)} type="primary">开闸</Button>
             </WingBlank>
@@ -97,7 +125,7 @@ class Checkpoint extends React.Component {
                 )
                 : null
             }
-          </Flex>
+          </Flex> */}
         </View>
         <WhiteSpace />
       </WingBlank>
@@ -113,7 +141,19 @@ class Checkpoint extends React.Component {
       <View style={{height: '100%'}}>
         <View style={{ height: '100%' }}>
           <ListView
-            header={() => <WhiteSpace size="lg" />}
+            header={() => (
+              <Flex>
+                <Flex.Item style={{ paddingTop: 20, paddingBottom: 20, paddingLeft: 4, paddingRight: 4 }}>
+                  <Text style={{fontSize: 18, textAlign: 'left', paddingLeft: 20,}}>卡口名称</Text>
+                </Flex.Item>
+                <Flex.Item style={{ paddingTop: 20, paddingBottom: 20,paddingLeft: 4, paddingRight: 4 }}>
+                  <Text style={{fontSize: 18, textAlign: 'center'}}>状态</Text>
+                </Flex.Item>
+                <Flex.Item style={{ paddingTop: 20, paddingBottom: 20,paddingLeft: 4, paddingRight: 4 }}>
+                  <Text style={{fontSize: 18,textAlign: 'center'}}>操作</Text>
+                </Flex.Item>
+              </Flex>
+            )}
             onFetch={this.onFetch}
             keyExtractor={(item, index) =>
               `${this.state.layout} - ${item} - ${index}`
@@ -170,14 +210,19 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
+    textAlign: 'left'
   },
   status: {
-    fontSize: 16
+    fontSize: 16,
+    textAlign: 'center'
   },
   normal_status: {
     color: 'green'
   },
   close_status: {
     color: 'red'
+  },
+  unline_status: {
+    color: '#1afa29',
   }
 })

@@ -44,7 +44,7 @@ instance.interceptors.response.use(async (res = {}) => {
     data = data.response;
   }
   if (data.error_code) {
-    Toast.fail(data.error_massage, 2, () => {}, false)
+    Toast.fail(data.error_massage, 1, () => {}, false)
     return Promise.reject(data);
   } else {
     return Promise.resolve(data);

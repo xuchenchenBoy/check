@@ -23,7 +23,7 @@ function *openPoint() {
     const { payload } = yield take(types.CHECKPOINT_OPEN_REQ)
     try {
       yield call(getReq, { url: '/v1.0/gate/open', params: payload })
-      Toast.success('开闸成功')
+      Toast.success('开闸成功', 1, () => {}, false)
       yield put({ type: types.CHECKPOINT_GET_LIST_REQ })
     } catch (e) {
       console.log(e);
@@ -36,7 +36,7 @@ function *restorePoint() {
     const { payload } = yield take(types.CHECKPOINT_RESTORE_REQ)
     try {
       yield call(postReq, { url: '/v1.0/gate/gate-recover', params: payload })
-      Toast.success('恢复成功')
+      Toast.success('恢复成功', 1, () => {}, false)
       yield put({ type: types.CHECKPOINT_GET_LIST_REQ })
     } catch (e) {
       console.log(e);
@@ -49,7 +49,7 @@ function *closePoint() {
     const { payload } = yield take(types.CHECKPOINT_CLOSE_REQ)
     try {
       yield call(postReq, { url: '/v1.0/gate/gate-close', params: payload })
-      Toast.success('锁定成功')
+      Toast.success('锁定成功', 1, () => {}, false)
       yield put({ type: types.CHECKPOINT_GET_LIST_REQ })
     } catch (e) {
       console.log(e);
