@@ -4,7 +4,7 @@ import { ListView, WingBlank, WhiteSpace, Flex, Button } from '@ant-design/react
 import PageFooter from '../components/common/PageFooter'
 import { connect } from 'react-redux'
 import * as types from '../constants/actionTypes'
-import { getCheckpointStatus, NORMAL_STATUS, CLOSED_STATUS, FAULT_STATUS } from '../constants/index'
+import { getCheckpointStatus, getCheckpointIcon, NORMAL_STATUS, CLOSED_STATUS, FAULT_STATUS } from '../constants/index'
 
 class Checkpoint extends React.Component {
   static navigationOptions = {
@@ -76,7 +76,10 @@ class Checkpoint extends React.Component {
                 <Text style={styles.name}>{group_name}</Text>
                 </Flex.Item>
                 <Flex.Item style={{ paddingTop: 20, paddingBottom: 20,paddingLeft: 4, paddingRight: 4 }}>
-                <Text style={[styles.status, isNormalStatus ? styles.normal_status : null, isCloseStatus ? styles.close_status : null, isUnlineStatus ? styles.unline_status : null]}>{getCheckpointStatus(status)}</Text>
+                  <Flex justify="center">
+                    <Text style={[styles.status, isNormalStatus ? styles.normal_status : null, isCloseStatus ? styles.close_status : null, isUnlineStatus ? styles.unline_status : null]}>{getCheckpointStatus(status)}</Text>   
+                    <Text>{getCheckpointIcon(status)}</Text>
+                  </Flex>
                 </Flex.Item>
                 <Flex.Item style={{ paddingTop: 20, paddingBottom: 20,paddingLeft: 4, paddingRight: 4 }}>
                 <Flex justify="end">

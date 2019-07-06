@@ -27,15 +27,17 @@ export default class CardList extends React.Component {
               <WingBlank key={`${plate_number}_${vehicle_type}`}>
                 <WhiteSpace size="lg" />
                 <WhiteSpace size="lg" />
-                <View style={styles.item}>
+                <Flex justify="between" style={styles.item}>
                   <View>
                     <Text style={styles.name}>{vehicle.label} | {plate_number}</Text>
-                    <Text style={styles.name}>{route}</Text>
-                    <Text style={styles.name}>
+                    <WhiteSpace size="sm" />
+                    <Text style={styles.desc}>
                       {formatTime(new Date(start_time))}
                       &nbsp; 至 &nbsp;
                       {formatTime(new Date(end_time))}
                     </Text>
+                    <WhiteSpace size="sm" />
+                    <Text style={styles.desc}>路线：{route}</Text>
                     <WhiteSpace />
                   </View>
                   <Flex justify="end">
@@ -43,7 +45,7 @@ export default class CardList extends React.Component {
                       <Button onPress={() => this.goDetail(i)} type="primary">查看</Button>
                     </WingBlank>
                   </Flex>
-                </View>
+                </Flex>
                 <WhiteSpace />
               </WingBlank>
             )
@@ -72,11 +74,17 @@ const styles = StyleSheet.create({
   item: {
     borderRadius: 5,
     padding: 15, 
+    paddingRight: 10,
     borderStyle: 'solid', 
     borderWidth: 1, 
     borderColor: 'rgb(221, 221, 221)',
   },
   name: {
     fontSize: 18,
+    color: '#333'
   },
+  desc: {
+    fontSize: 15,
+    color: '#999'
+  }
 })

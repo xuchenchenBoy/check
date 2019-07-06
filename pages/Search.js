@@ -70,6 +70,10 @@ class Search extends React.Component {
     this.props.navigation.replace('login')
   }
 
+  goModifyPassword() {
+    this.props.navigation.push('modifyPassword')
+  }
+
   render() {
     const { list, loading, hadReqList } = this.props;
     const { cameraCarNumber, plateColor, username } = this.state;
@@ -81,7 +85,10 @@ class Search extends React.Component {
             <Icon color="#108EE9" name="environment"></Icon>
             <Text style={styles.username}>{username}</Text>
           </Flex>
-          <Text onPress={this.logout.bind(this)} style={styles.logout}>登出</Text>
+          <Flex>
+            <Text onPress={this.logout.bind(this)} style={styles.logout}>登出</Text>
+            <Text onPress={this.goModifyPassword.bind(this)} style={styles.modifyPassword}>修改密码</Text>
+          </Flex>
         </Flex>
        <PageHeader 
         loading={loading} 
@@ -109,6 +116,10 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   logout: {
+    fontSize: 16,
+    paddingRight: 15,
+  },
+  modifyPassword: {
     fontSize: 16
   },
   bottom: {

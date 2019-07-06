@@ -9,6 +9,7 @@ import QrScan from './QrScan'
 import Startup from './Startup'
 import CameraHandler from './CameraHandler'
 import WebContainer from './WebContainer'
+import ModifyPassword from './ModifyPassword'
 import { Button, Provider, Toast } from '@ant-design/react-native';
 import NavigationService from '../utils/navigationService'
 import { getData } from '../utils/storage'
@@ -34,6 +35,9 @@ const AppNavigator = createStackNavigator({
   },
   cameraHandler: {
     screen: CameraHandler
+  },
+  modifyPassword: {
+    screen: ModifyPassword
   }
 }, {
   initialRouteName: 'startup'

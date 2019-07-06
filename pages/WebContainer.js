@@ -1,5 +1,6 @@
 import React from 'react'
 import { WebView } from 'react-native-webview';
+import { View, Text } from 'react-native'
 
 export default class WebContainer extends React.Component {
   static navigationOptions = {
@@ -11,7 +12,11 @@ export default class WebContainer extends React.Component {
     const url = navigation.getParam('url');
 
     return (
-      <WebView source={{ uri: url }} />
+      <WebView 
+      startInLoadingState={true} 
+      renderLoading={() => <View style={{position: 'absolute', width: '100%', left: 0, top: '30%', textAlign: 'center'}}><Text style={{textAlign: 'center', fontSize: 16}}>数据加载中...</Text></View>} 
+      source={{ uri: url }} 
+      />
     )
   }
 }
