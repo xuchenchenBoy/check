@@ -45,14 +45,15 @@ export default class CameraHandler extends PureComponent {
           }}
           captureAudio={false}
         /> 
-        <View style={{ position: 'absolute', width: '90%', height: '100%', left: '5%', top: '30%' }}>
-          <View style={{ height: 2, width: '100%', backgroundColor: '#37b44a' }} />
-          <View style={{ height: 150, width: 2, backgroundColor: '#37b44a' }} />
+        <View style={{ position: 'absolute', width: '100%', height: '100%', left: '20%', top: '35%' }}>
+          <View style={{ height: 2, width: '60%', backgroundColor: '#22ff00' }} />
+          <View style={{ height: 80, width: 2, backgroundColor: '#22ff00' }} />
         </View>
-        <View style={{ position: 'absolute', width: '100%', right: '5%', top: '30%', transform: [{rotate: '180deg'}] }}>
-          <View style={{ height: 2, width: '90%', backgroundColor: '#37b44a' }} />
-          <View style={{ height: 150, width: 2, backgroundColor: '#37b44a' }} />
+        <View style={{ position: 'absolute', width: '100%', right: '20%', top: '35%', transform: [{rotate: '180deg'}] }}>
+          <View style={{ height: 2, width: '60%', backgroundColor: '#22ff00' }} />
+          <View style={{ height: 80, width: 2, backgroundColor: '#22ff00' }} />
         </View>
+        <View style={{ position: 'absolute', width: '100%', height: '100%', left: '0%', top: '55%' }}><Text style={{textAlign: 'center', fontSize: 18, color: '#fff'}}>请将车牌对准方框内进行扫描</Text></View>
         <View style={{ flex: 0, padding: 15, flexDirection: 'row', justifyContent: 'center' }}>
         <Button disabled={loading} onPress={this.takePicture.bind(this)} loading={loading}>{loading ? '识别中...' : '识别' }</Button>
         </View>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground } from 'react-native'
 import { storeData, getData } from '../utils/storage'
 
 export default class Startup extends React.PureComponent {
@@ -15,15 +15,12 @@ export default class Startup extends React.PureComponent {
       } else {
         this.props.navigation.replace('login')
       }
-    }, 1000)
+    }, 2000)
   }
 
   render() {
     return (
-      <View style={styles.wrapper}>
-        <Text style={styles.content}>电子通行证审批系统(EPPS)手持终端机</Text>
-        <Text style={styles.bottom}>郑州汤尼智能科技</Text>
-      </View>
+      <ImageBackground source={require('../assets/startup_bg.jpg')} style={{width: '100%', height: '100%'}} />
     )
   }
 }

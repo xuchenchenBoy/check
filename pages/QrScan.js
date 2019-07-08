@@ -12,11 +12,27 @@ class QrScan extends React.Component {
     header: null
   }
 
-  onReadScan(e) {
+  constructor(props) {
+    super(props)
+    this.scaning = false;
+    this.scanner = null;
+  }
+
+  async onReadScan(e) {
+    if (this.scaning) {
+      return;
+    }
+    this.scaning = true;
     const { reactivate } = this.props;
-    (reactivate && e.data) && this.props.checkEncrypt({
-      encrypt_data: e.data
-    })
+    if (reactivate && e.data) {
+      await this.props.checkEncrypt({
+        encrypt_data: e.data
+      })
+    }
+    setTimeout(() => {
+      this.scaning = false;
+      this.scanner.reactivate()
+    }, 2000);
   }
 
   goRouter = (routeName) => {
@@ -26,12 +42,12 @@ class QrScan extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <QRCodeScanner
+         <QRCodeScanner
           ref={ref => this.scanRef = ref}
           onRead={this.onReadScan.bind(this)}
-          reactivate={true}
           cameraStyle={{height: '100%'}}
-        />
+          ref={(node) => { this.scanner = node }}
+        /> 
         <Container />
         <View style={styles.bottom}>
           <PageFooter goRouter={this.goRouter} routerName="qrScan" />

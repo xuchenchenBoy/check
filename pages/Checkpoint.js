@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   status: {
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center'
   },
   normal_status: {
@@ -226,6 +226,6 @@ const styles = StyleSheet.create({
     color: 'red'
   },
   unline_status: {
-    color: '#1afa29',
+    color: '#999',
   }
 })
