@@ -15,7 +15,7 @@ export default class Startup extends React.PureComponent {
       } else {
         this.props.navigation.replace('login')
       }
-    }, 2000)
+    }, 1000)
   }
 
   render() {

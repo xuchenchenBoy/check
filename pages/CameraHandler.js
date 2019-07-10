@@ -55,7 +55,7 @@ export default class CameraHandler extends PureComponent {
         </View>
         <View style={{ position: 'absolute', width: '100%', height: '100%', left: '0%', top: '55%' }}><Text style={{textAlign: 'center', fontSize: 18, color: '#fff'}}>请将车牌对准方框内进行扫描</Text></View>
         <View style={{ flex: 0, padding: 15, flexDirection: 'row', justifyContent: 'center' }}>
-        <Button disabled={loading} onPress={this.takePicture.bind(this)} loading={loading}>{loading ? '识别中...' : '识别' }</Button>
+        <Button disabled={loading} onPress={this.takePicture.bind(this)} >{loading ? '识别中...' : '识别' }</Button>
         </View>
       </View>
     );
@@ -68,15 +68,21 @@ export default class CameraHandler extends PureComponent {
       this.setState({
         loading: true
       })
-      const key = Toast.loading('识别中')
-      const options = { quality: 0.1, base64: true, };
+      const key = Toast.loading('识别中', 0, () => {}, false)
+      const options = { quality: 1, base64: false, };
       const data = await this.camera.takePictureAsync(options);
-      const { base64 } = data;
+      const { uri } = data;
       try {
-        const data = await postReq({ url: '/v1.0/management/ocr', params: {
-          photo: base64,
-          mark: "plate"
-        }})
+        const body = new FormData();
+        const name = Date.now() + '_image.jpg'
+        let file = {
+          uri,
+          name,
+          type: 'image/jpg'
+        };
+        body.append('photo', file);
+        body.append('mark', 'plate');
+        const data = await postReq({ url: '/v1.0/management/ocr', params: body })
         if (data.error_code) {
           Toast.fail(data.error_massage)
           Portal.remove(key)
@@ -89,12 +95,10 @@ export default class CameraHandler extends PureComponent {
       } catch (err) {
         console.log(err)
       } finally {
-        setTimeout(() => {
           Portal.remove(key)
           this.setState({
             loading: false
           })
-        }, 2000)
       }
     }
   };

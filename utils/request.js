@@ -34,7 +34,6 @@ instance.interceptors.request.use(
 
 // 响应拦截
 instance.interceptors.response.use(async (res = {}) => {
-  console.log('res=', res)
   const token = res.headers['x-auth-token']
   if (token) {
     await storeData('token', token)
