@@ -83,18 +83,18 @@ class Checkpoint extends React.Component {
                 </Flex.Item>
                 <Flex.Item style={{ paddingTop: 20, paddingBottom: 20,paddingLeft: 4, paddingRight: 4 }}>
                 <Flex justify="end">
-              <Button style={{width: 60, marginRight: 10}}  size="small" onPress={() => this.openPoint(gate_num)} type="primary">开闸</Button>
+              <Button style={{width: 75, marginRight: 10}}  onPress={() => this.openPoint(gate_num)} type="primary">开闸</Button>
             { 
               isCloseStatus || (FAULT_STATUS === status)
                 ? (
-                      <Button style={{width: 60, marginRight: 10}}  size="small" onPress={() => this.restorePoint(gate_num)} type="ghost">恢复</Button>
+                      <Button style={{width: 75}}  onPress={() => this.restorePoint(gate_num)} type="ghost">恢复</Button>
                 )
                 : null
             }
             {
               isNormalStatus
                 ? (
-                      <Button style={{width: 60}} size="small" onPress={() => this.closePoint(gate_num)} type="ghost">锁定</Button>
+                      <Button style={{width: 75}}  onPress={() => this.closePoint(gate_num)} type="ghost">锁定</Button>
                 )
                 : null
             }

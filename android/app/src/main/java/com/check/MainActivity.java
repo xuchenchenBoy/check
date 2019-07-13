@@ -5,6 +5,9 @@ import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
+
 public class MainActivity extends ReactActivity {
 
     /**
@@ -25,4 +28,15 @@ public class MainActivity extends ReactActivity {
          }
        };
      }
+
+     // 禁止字体缩放
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config=new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config,res.getDisplayMetrics());
+        return res;
+    }
+
 }

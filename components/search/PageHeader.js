@@ -107,7 +107,7 @@ class PageHeader extends React.Component {
               onChange={this.onChangeInput}
               extra={<Icon style={{paddingLeft: 15}} onPress={this.goCamera} name="camera" size="lg" color="#108EE9" />}
             >
-              <Text style={{fontSize: 22, color: '#000'}}>车牌号</Text>
+              <Text style={{width: 100, fontSize: 22, color: '#000'}}>车牌号</Text>
             </InputItem>
           </List.Item>
         </List>
@@ -136,7 +136,8 @@ const styles = StyleSheet.create({
   plate: {
     paddingLeft: 20,
     color: '#999', 
-    fontSize: 20
+    fontSize: 20,
+    height: 56,
   }
 });
 
